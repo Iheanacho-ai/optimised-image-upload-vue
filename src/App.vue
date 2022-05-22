@@ -74,6 +74,9 @@ import {sdk} from '../init';
       }
 
     },
+    mounted: function(){
+      this.listProducts()
+    },
     methods: {
       openUploadModal: function() {
         window.cloudinary.openUploadWidget(
@@ -90,7 +93,7 @@ import {sdk} from '../init';
       },
       handleProductSubmit: async function(){
         try {
-          await sdk.database.createDocument('627ef1d1e659b7895ade', 'unique()', {
+          await sdk.database.createDocument('628a9019078ea3c2b384', 'unique()', {
           "productName" : this.productName,
           "productPrice": this.productPrice,
           "productImage": this.productImage
@@ -98,8 +101,8 @@ import {sdk} from '../init';
          alert('your job item has been successfully saved')
          this.productName= '',
          this.productPrice= '',
-         this.productImage= ''
-          this.listProducts()
+         this.productImage= '',
+         this.listProducts()
         } catch (error) {
           console.log(error)
         }
@@ -107,7 +110,7 @@ import {sdk} from '../init';
       },
       listProducts: async function(){
         try {
-          let response = await sdk.database.listDocuments('627ef1d1e659b7895ade');
+          let response = await sdk.database.listDocuments('628a9019078ea3c2b384');
           console.log(response, 'response')
           this.products = response.documents
         } catch (error) {
@@ -117,7 +120,7 @@ import {sdk} from '../init';
       },
       handleDelete: async function(documentid){
         try {
-          await sdk.database.deleteDocument('627ef1d1e659b7895ade', documentid);
+          await sdk.database.deleteDocument('628a9019078ea3c2b384', documentid);
           alert("item have been deleted successfully")
           this.listProducts()
         } catch (error) {
